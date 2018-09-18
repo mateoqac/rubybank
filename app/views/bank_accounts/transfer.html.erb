@@ -1,0 +1,17 @@
+<h2>
+Please select an user to make the transfer
+</h2>
+
+<h4>
+
+ <div class="form">
+    <%= simple_form_for(@transaction, html: { class: 'form-inline' }) do |form| %>
+      <%= form.input :bank_account_id,:collection => @users,:label_method => :username, :value_method => :bank_account_id,:label => "User to transfer" ,:include_blank => true %>
+      <%= form.input :amount %>
+      <%= form.hidden_field :sender, :value => current_user.bank_account.id %>
+      <%= form.button :submit, class: 'btn btn-primary' %>
+    <% end%>
+
+
+  </div>
+</h4>

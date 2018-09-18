@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RubyBank</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <% if notice %>
+      <p class="alert alert-success">
+        <%= notice %>
+        <span class="pull-right">
+          <%= link_to 'x', class: 'close', data: {dismiss: "alert"}%>
+        </span>
+      </p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger">
+        <%= alert %>
+        <span class="pull-right">
+          <%= link_to 'x', class: 'close', data: {dismiss: "alert"}%>
+        </span>
+      </p>
+    <% end %>
+    <%= yield %>
+    <% if user_signed_in? %>
+      <div class="main">
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+      </div>
+    <% end %>
+
+  </body>
+</html>

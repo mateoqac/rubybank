@@ -1,0 +1,9 @@
+<h1>Welcome <%= current_user.username%></h1>
+
+<h4>
+  Your account <%= current_user.bank_account.id%> has a balance of $<%= current_user.bank_account.balance%>
+    <%if current_user.has_balance_positive? %>
+      <%= link_to "Make a transfer", { controller: "bank_accounts", action: "transfer" }, id: "transfer" %>
+    <%end%>
+
+<h4>
