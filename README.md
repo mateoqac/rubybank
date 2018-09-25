@@ -9,3 +9,11 @@ def count_bits(path)
   puts "found #{f.count("0")} bits set to 0"
 end
 ```
+TODO:
+ count_bits no cuenta bits, cuenta contenido. mejorar con unpack.
+
+BANK:
+
+controlar el usuario que hace el envio.
+controlar que el amount no sea menor que 0
+controlar y estar seguro que AMBAS transacciones se llevan a cabo o sino ROLLBACK.
