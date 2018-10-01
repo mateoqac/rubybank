@@ -11,8 +11,6 @@ def count_bits(path)
 end
 ```
 TODO:
- count_bits no cuenta bits, cuenta contenido. mejorar con unpack.
-
 BANK:
 
 controlar el usuario que hace el envio.
