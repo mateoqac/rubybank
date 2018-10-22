@@ -1,7 +1,7 @@
 class BankAccount < ApplicationRecord
-  #Add audit_comment as a attr
-  audited
   belongs_to :user
+  audited
+  require 'exceptions'
 
   validates :user, presence: true
   validates :balance, presence: true, numericality: true
@@ -10,34 +10,25 @@ class BankAccount < ApplicationRecord
 
   before_validation :set_defaults
 
-  def make_transfer(amount,trans_type)
-    if trans_type == 'deposit'
-      transaction  = Transaction.create(amount:amount, transaction_type: trans_type, bank_account: self)
-      if(transaction.save)
-        self.balance += amount
-        self.save!
-      else
-        return false
-      end
+  def deposit(amount)
+    self.balance += amount
+    create_transaction(amount,'deposit')
+    self.save
+  end
 
-    end
-
-    if trans_type == 'withdrawal'
-      if(self.balance >= amount)
-          transaction  = Transaction.create(amount:amount, transaction_type: trans_type, bank_account: self)
-          if(transaction.save)
-            self.balance -= amount
-            self.save!
-          else
-            return false
-          end
-      else
-        return false
-      end
+  def withdraw(amount)
+    if (can_withdraw?(amount))
+      self.balance -= amount
+      create_transaction(amount,'withdrawal')
+      self.save
+    else
+      raise Exceptions::InsufficientFundsError.new
     end
   end
 
-  def can_withdrawal?(amount)
+
+
+  def can_withdraw?(amount)
     self.balance >= amount
   end
 
@@ -47,5 +38,10 @@ class BankAccount < ApplicationRecord
       self.balance = 0.00
       self.audit_comment = "New account for #{user.username}"
     end
+  end
+
+  def create_transaction(amount,trans_type)
+    transaction  = Transaction.create(amount:amount, transaction_type: trans_type, bank_account: self)
+    transaction.save
   end
 end

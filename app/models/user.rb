@@ -15,7 +15,7 @@ class User < ApplicationRecord
   scope :all_except, ->(user) { where.not(id: user) }
 
   def add_credit(amount)
-    self.bank_account.make_transfer(amount, 'deposit')
+    self.bank_account.deposit(amount)
   end
 
   def bank_account_id

@@ -11,7 +11,9 @@ Please select an user to make the transfer
       <%= form.hidden_field :sender, :value => current_user.bank_account.id %>
       <%= form.button :submit, class: 'btn btn-primary' %>
     <% end%>
-
-
   </div>
+
+  <a href="#">
+    <%= link_to "Back", authenticated_root_path%>
+  </a>
 </h4>

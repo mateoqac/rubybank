@@ -10,7 +10,6 @@
   </head>
 
   <body>
-
     <% if notice %>
       <p class="alert alert-success">
         <%= notice %>
@@ -27,12 +26,7 @@
         </span>
       </p>
     <% end %>
+    <%= render partial: 'layouts/nav'%>
     <%= yield %>
-    <% if user_signed_in? %>
-      <div class="main">
-        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-      </div>
-    <% end %>
-
   </body>
 </html>
