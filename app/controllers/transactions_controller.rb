@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
       destination_account.deposit(amount)
       flash[:notice] = "Your transfer was made successfully"
       redirect_to authenticated_root_path
-    end
+    end unless amount < 0
   rescue Exceptions::InsufficientFundsError => e
       flash[:alert] = "There were some problems with your transfer, "+e.message
       redirect_to bank_account_transfer_path
