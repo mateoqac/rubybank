@@ -10,9 +10,4 @@ def count_bits(path)
   
 end
 ```
-TODO:
-BANK:
 
-controlar el usuario que hace el envio.
-controlar que el amount no sea menor que 0
-controlar y estar seguro que AMBAS transacciones se llevan a cabo o sino ROLLBACK.
